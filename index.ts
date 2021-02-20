@@ -28,6 +28,14 @@ export default class wLogger {
         this.makeLog(level, logString)
     }
 
+    adapter(type: 'START'|'END'|'ERROR', {ip, method, originalUrl, protocol, query, headers, body}) {
+        const logLevel = (type === 'ERROR') ? this.logLevel.error : this.logLevel.info
+        const request = { query, headers, body }
+        const requestStr = JSON.stringify(request, null, ' ')
+        const logString = `${ip} ${method} ${originalUrl} ${protocol} ${requestStr}`
+        this.log(logLevel, logString)
+    }
+
     private makeLog(logLevel: string, logString: string) {
         const logMessage = `[${moment().format()}] [${logLevel}] ${logString}`
         this.printLog(logMessage)
