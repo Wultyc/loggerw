@@ -1,0 +1,10 @@
+{
+    "wLogger" : {
+        "location": "/logs",
+        "fileNameFormat":"[TS].log",
+        "fileNameTimeStampFormat":"YYYYMMDD",
+        "enableOriginFileLog": true,
+        "enableFileLog": true,
+        "enableConsoleLog": true
+    }
+}
