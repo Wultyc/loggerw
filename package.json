@@ -1,6 +1,6 @@
 {
   "name": "loggerw",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Advanced logger for JS applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,17 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wultyc/wlogger.git"
+    "url": "git+https://github.com/Wultyc/loggerw.git"
   },
   "keywords": [
-    "wLogger"
+    "loggerw"
   ],
   "author": "wultyc",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Wultyc/wlogger/issues"
+    "url": "https://github.com/Wultyc/loggerw/issues"
   },
-  "homepage": "https://github.com/Wultyc/wlogger#readme",
+  "homepage": "https://github.com/Wultyc/loggerw#readme",
   "dependencies": {
     "caller": "^1.0.1",
     "moment": "^2.29.1",
