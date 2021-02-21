@@ -5,6 +5,10 @@
         "fileNameTimeStampFormat":"YYYYMMDD",
         "enableOriginFileLog": true,
         "enableFileLog": true,
-        "enableConsoleLog": true
+        "enableConsoleLog": true,
+        "express": {
+            "enableRequestLog": true,
+            "enableResponseLog": true
+        }
     }
 }
