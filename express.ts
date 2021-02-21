@@ -44,7 +44,7 @@ function adapterStart(req: Request) {
     const requestStr = JSON.stringify(request, null, ' ')
     const logString = `${ip} ${protocol} ${method} ${uri} ${requestStr}`
     const log = new logger()
-    log.adapter(log.adapters.start, logString)
+    log.adapter(log.adapters.serviceStart, logString)
 }
 
 function adapterEnd(req: Request, res: Response, responseBody: any) {
@@ -60,5 +60,5 @@ function adapterEnd(req: Request, res: Response, responseBody: any) {
     const responseStr = JSON.stringify(response, null, ' ')
     const logString = `${ip} ${protocol} ${method} ${uri} ${statusCode} ${responseStr}`
     const log = new logger()
-    log.adapter(log.adapters.end, logString)
+    log.adapter(log.adapters.serviceEnd, logString)
 } 

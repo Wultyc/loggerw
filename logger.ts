@@ -13,9 +13,11 @@ export default class wLogger {
     }
 
     public readonly adapters = {
-        start: "START",
-        end: "END",
-        error: "ERROR"
+        adapterStart: "ADAPTER_START",
+        adapterEnd: "ADAPTER_END",
+        adapterError: "ADAPTER_ERROR",
+        serviceStart: "SERVICE_START",
+        serviceEnd: "SERVICE_END"
     }
 
     constructor(){
@@ -32,7 +34,7 @@ export default class wLogger {
         const adapterType = this.validateAdapter(type)
         const logLevel = (type === 'ERROR') ? this.logLevel.error : this.logLevel.info
         const adapterMsg = JSON.stringify(message, null, ' ')
-        const logString = `[ADAPTER_${adapterType}] ${adapterMsg}`
+        const logString = `[${adapterType}] ${adapterMsg}`
         this.core.makeLog(logLevel, logString)
     }
 
