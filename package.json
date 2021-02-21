@@ -2,7 +2,8 @@
   "name": "wlogger",
   "version": "1.0.0",
   "description": "Advanced logger for JS applications",
-  "main": "index.js",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "node dist/examples/index.js",
     "dev": "nodemon examples/index.ts",
