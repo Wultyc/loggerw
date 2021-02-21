@@ -50,12 +50,12 @@ export default class wLogger {
             this.adapter('START', req)
 
         if (this.expressMiddlewareOption.logResponse === true){
-            //this.adapter('START', req)
-            let send = res.send;
-            res.send = function(body, logFunction:any = this.adapter): typeof res.send{
+            let originalExpressResponseSend = res.send;
+            let logFunction = this.adapter
+            // @ts-ignore: Unreachable code error
+            res.send = (body): typeof res.send => {
                 logFunction('END',body)
-                send.call(this, body)
-                return res.send
+                originalExpressResponseSend.call(this, body)
             }
         }
             
