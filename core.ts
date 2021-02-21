@@ -50,7 +50,7 @@ export default class core {
     }
 
     private setup() {
-        const cfg = config.wLogger.logFile
+        const cfg = config.LoggerW.logFile
 
         const filename = `${cfg.fileNameFormat}`.replace('[TS]', moment().format(cfg.fileNameTimeStampFormat))
         this.logFolderPath = path.join(path.resolve('./'), cfg.location)

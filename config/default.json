@@ -1,5 +1,5 @@
 {
-    "wLogger" : {
+    "LoggerW" : {
         "logFile":{
             "location": "/logs",
             "fileNameFormat":"[TS].log",

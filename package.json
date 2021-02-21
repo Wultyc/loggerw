@@ -1,5 +1,5 @@
 {
-  "name": "wlogger",
+  "name": "loggerw",
   "version": "1.0.0",
   "description": "Advanced logger for JS applications",
   "main": "dist/index.ts",

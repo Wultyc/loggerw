@@ -6,7 +6,7 @@ import logger from './logger'
 export { expressMiddleware, adapterStart, adapterEnd }
 
 function expressMiddleware(req: Request, res: Response, next: NextFunction) {
-    const cfg = config.wLogger
+    const cfg = config.LoggerW
 
     if(cfg.ids.request.enable === true)
         res.set(cfg.ids.request.header,uuidV4())
