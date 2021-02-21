@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { config } from 'node-config-ts'
+import { Request, Response, NextFunction } from 'express'
 import caller from 'caller'
 import path from 'path'
 import fs from 'fs'
@@ -10,6 +11,7 @@ export default class wLogger {
     private logFilePath: string
     private enableConsoleLog: boolean
     private enableFileLog: boolean
+    private expressMiddlewareOption: { logRequest: boolean, logResponse: boolean }
 
     public readonly logLevel = {
         info: "INFO",
@@ -28,12 +30,28 @@ export default class wLogger {
         this.makeLog(level, logString)
     }
 
-    adapter(type: 'START'|'END'|'ERROR', {ip, method, originalUrl, protocol, query, headers, body}) {
+    adapter(type: 'START' | 'END' | 'ERROR', { ip, method, originalUrl, protocol, query, headers, body }) {
         const logLevel = (type === 'ERROR') ? this.logLevel.error : this.logLevel.info
         const request = { query, headers, body }
         const requestStr = JSON.stringify(request, null, ' ')
         const logString = `${ip} ${method} ${originalUrl} ${protocol} ${requestStr}`
         this.log(logLevel, logString)
+    }
+
+    expressMiddleware(req: Request, res: Response, next: NextFunction) {
+        if (this.expressMiddlewareOption.logRequest === true)
+            this.adapter('START', req)
+
+        if (this.expressMiddlewareOption.logResponse === true){
+            //this.adapter('START', req)
+            let send = res.send;
+            res.send = function(body, logFunction:any = this.adapter): typeof res.send{
+                logFunction('END',body)
+                send.call(this, body)
+                return res.send
+            }
+        }
+            
     }
 
     private makeLog(logLevel: string, logString: string) {
@@ -88,6 +106,8 @@ export default class wLogger {
         this.enableFileLog = cfg.enableFileLog
 
         this.loggerLocation = (cfg.enableOriginFileLog == true) ? caller(2).replace(path.resolve('./'), "") : ""
+
+        this.expressMiddlewareOption = { logRequest: cfg.express.enableRequestLog, logResponse: cfg.express.enableResponseLog }
     }
 
 }
