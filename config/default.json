@@ -1,14 +1,26 @@
 {
     "wLogger" : {
-        "location": "/logs",
-        "fileNameFormat":"[TS].log",
-        "fileNameTimeStampFormat":"YYYYMMDD",
-        "enableOriginFileLog": true,
-        "enableFileLog": true,
-        "enableConsoleLog": true,
+        "logFile":{
+            "location": "/logs",
+            "fileNameFormat":"[TS].log",
+            "fileNameTimeStampFormat":"YYYYMMDD",
+            "enableOriginFileLog": true,
+            "enableFileLog": true,
+            "enableConsoleLog": true
+        },
         "express": {
             "enableRequestLog": true,
             "enableResponseLog": true
+        },
+        "ids":{
+            "request": {
+                "enable": true,
+                "header": "x-request"
+            },
+            "correlation": {
+                "enable": true,
+                "header": "x-request"
+            }
         }
     }
 }
