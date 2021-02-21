@@ -101,7 +101,7 @@ Will generate the following log
 ##### Adapters
 The method to create a generic log is 
 ```js
-adapter(Adapter Type, Log Message)
+adapter(Adapter Type, Log Message, [KeyName, [KeyValue]])
 ```
 The possible values for Log Level are
 - ADAPTER_START
@@ -122,6 +122,7 @@ This will generate the following result
 ```log
 [2021-02-21T17:04:36+00:00] [ADAPTER_START]  "127.0.0.1 HTTP GET /page {query: {}, header:{}, body:{}}"
 ```
+The rules for `keyName` and `keyValue` are the same as `log()` method.
 > This function is used on express.js middleware to provide Service Start/End log messages
 
 ## Settings File
