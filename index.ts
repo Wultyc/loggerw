@@ -11,7 +11,6 @@ export default class wLogger {
     private logFilePath: string
     private enableConsoleLog: boolean
     private enableFileLog: boolean
-    private expressMiddlewareOption: { logRequest: boolean, logResponse: boolean }
 
     public readonly logLevel = {
         info: "INFO",
@@ -46,19 +45,27 @@ export default class wLogger {
     }
 
     expressMiddleware(req: Request, res: Response, next: NextFunction) {
-        if (this.expressMiddlewareOption.logRequest === true)
-            this.adapter('START', req)
+        const cfg = config.wLogger
+        if (cfg.express.enableRequestLog === true){}
+            //this.adapter('START', req)
+            console.log({query: req.query, headers: req.headers, body: req.body})
 
-        if (this.expressMiddlewareOption.logResponse === true){
+        if (cfg.express.enableResponseLog === true){
             let originalExpressResponseSend = res.send;
-            let logFunction = this.adapter
+            //let logFunction = this.adapter
             // @ts-ignore: Unreachable code error
             res.send = (body): typeof res.send => {
-                logFunction('END',body)
-                originalExpressResponseSend.call(this, body)
+                console.log({
+                    statusCode: res.statusCode,
+                    statusMessage: res.statusMessage,
+                    header:JSON.stringify(res.getHeaders()),
+                    body:JSON.stringify(body)
+                })
+                originalExpressResponseSend.call(res, body)
             }
         }
-            
+
+        next()
     }
 
     private makeLog(logLevel: string, logString: string) {
@@ -121,8 +128,6 @@ export default class wLogger {
         this.enableFileLog = cfg.enableFileLog
 
         this.loggerLocation = (cfg.enableOriginFileLog == true) ? caller(2).replace(path.resolve('./'), "") : ""
-
-        this.expressMiddlewareOption = { logRequest: cfg.express.enableRequestLog, logResponse: cfg.express.enableResponseLog }
     }
 
 }
