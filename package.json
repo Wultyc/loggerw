@@ -1,8 +1,8 @@
 {
   "name": "loggerw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Advanced logger for JS applications",
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "node dist/examples/index.js",
