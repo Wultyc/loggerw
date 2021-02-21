@@ -20,6 +20,12 @@ export default class wLogger {
         error: "ERROR"
     }
 
+    public readonly adapters = {
+        start: "START",
+        end: "END",
+        error: "ERROR"
+    }
+
     constructor() {
         this.setup()
     }
@@ -30,7 +36,8 @@ export default class wLogger {
         this.makeLog(level, logString)
     }
 
-    adapter(type: 'START' | 'END' | 'ERROR', { ip, method, originalUrl, protocol, query, headers, body }) {
+    adapter(type: string, {ip, method, originalUrl, protocol, query, headers, body}) {
+        const adapterType = this.validateAdapter(type)
         const logLevel = (type === 'ERROR') ? this.logLevel.error : this.logLevel.info
         const request = { query, headers, body }
         const requestStr = JSON.stringify(request, null, ' ')
@@ -93,6 +100,14 @@ export default class wLogger {
             return this.logLevel.info
         }
         return level
+    }
+
+    private validateAdapter(adapter: string): string {
+        if (Object.values(this.adapters).indexOf(adapter) === -1) {
+            this.log(this.logLevel.warning, `${adapter} is not a supported value`)
+            return 'undefined'
+        }
+        return adapter
     }
 
     private setup() {
