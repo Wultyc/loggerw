@@ -1,6 +1,6 @@
 {
   "name": "loggerw",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Advanced logger for JS applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,6 +35,6 @@
     "@types/node": "^14.14.31",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.2.2"
   }
 }
