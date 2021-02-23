@@ -32,7 +32,7 @@ export default class wLogger {
 
     adapter(type: string, message: any, keyName?: string, keyValue?: string) {
         const adapterType = this.validateAdapter(type)
-        const logLevel = (type === 'ERROR') ? this.logLevel.error : this.logLevel.info
+        const logLevel = (type === this.adapters.adapterError) ? this.logLevel.error : this.logLevel.info
         const adapterMsg = JSON.stringify(message, null, ' ')
         const logString = `[${adapterType}] ${this.core.writeTrackDetails(keyName, keyValue)} ${adapterMsg}`
         this.core.makeLog(logLevel, logString)
