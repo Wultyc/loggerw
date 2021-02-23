@@ -58,9 +58,9 @@ Combined with the default settings this will log all request and corresponding r
 ...
 [2021-02-21T17:04:36+00:00] [INFO] [SERVICE_END] "::1 http GET / 200 {\n \"header\": \"{\\\"x-powered-by\\\":\\\"Express\\\",\\\"x-request\\\":\\\"d0157889-8633-47b5-80a2-2e8573adf535\\\"}\",\n \"body\": \"\\\"Hello World!\\\"\"\n}"
 ```
-This middleware make 2 logs: Adapter Start and Adapter End
-- Adapter Start: Log the information that reach the application such as IP address, protocol, HTTP verb, endpoint, query params, request headers and body.
-- Adapter End: Log the information that reach the application such as IP address, protocol, HTTP verb, endpoint, response status code, headers and body.
+This middleware make 2 logs: Service Start and Service End
+- Service Start: Log the information that reach the application such as IP address, protocol, HTTP verb, endpoint, query params, request headers and body.
+- Service End: Log the information that reach the application such as IP address, protocol, HTTP verb, endpoint, response status code, headers and body.
 
 #### General use logger
 Besides express, you can create your own logs based on generic logs and adapters
@@ -80,9 +80,9 @@ And they are available from `logLevel` property.
 
 To use this you need to import the default module, instanciaste it and then create your log
 ```js
-import logger from 'wLogger'
-const log = new logger()
-log.log(log.logLevel.info, "Making a log on / endpoint")
+import loggerw from 'loggerw'
+const logger = new loggerw()
+logger.log(log.logLevel.info, "Making a log on / endpoint")
 ```
 This will generate the following result
 ```log
@@ -103,7 +103,7 @@ The method to create a generic log is
 ```js
 adapter(Adapter Type, Log Message, [KeyName, [KeyValue]])
 ```
-The possible values for Log Level are
+The possible values for Adapter Type are
 - ADAPTER_START
 - ADAPTER_END
 - ADAPTER_ERROR
@@ -114,9 +114,9 @@ And they are available from `adapters` property.
 
 To use this you need to import the default module, instanciaste it and then create your log
 ```js
-import logger from 'wLogger'
-const log = new logger()
-log.adapter(log.adapters.start, "127.0.0.1 HTTP GET /page {query: {}, header:{}, body:{}}")
+import loggerw from 'loggerw'
+const logger = new loggerw()
+logger.adapter(log.adapters.start, "127.0.0.1 HTTP GET /page {query: {}, header:{}, body:{}}")
 ```
 This will generate the following result
 ```log
